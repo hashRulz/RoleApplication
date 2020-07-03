@@ -32,6 +32,17 @@ public class RoleServiceImpl implements RoleService{
 		roleRepository.deleteById(id);
 		
 	}
+	@Override
+	public void updateRoleById(int id,Role role) {
+		Role roleObj = roleRepository.findOneByid(id);
+		roleObj.setFname(role.getFname());
+		roleObj.setLname(role.getLname());
+		roleObj.setOrg(role.getOrg());
+		roleObj.setNic(role.getNic());
+		roleObj.setRoleType(role.getRoleType());
+		roleRepository.save(roleObj);
+	}
+	
 	
 	
 	
