@@ -21,12 +21,19 @@ public class RoleServiceImpl implements RoleService{
 	}
 	@Override
 	public List<Role> getAllRoles() {
-		return roleRepository.findAll();
+		return (List<Role>) roleRepository.findAll();
 	}
 	@Override
 	public Role getRoleById(String nic) {
 		return roleRepository.findOneByNic(nic);
 	}
+	@Override
+	public void deleteRole(int id) {
+		roleRepository.deleteById(id);
+		
+	}
+	
+	
 	
 	
 

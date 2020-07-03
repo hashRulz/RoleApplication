@@ -3,6 +3,7 @@ package com.haulmatic.roleapplication.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,18 +23,27 @@ public class RoleController {
 	
 	@PostMapping(path="/save")
 	public void save(@RequestBody Role role) {
-		roleService.save(role);
+		try {
+			roleService.save(role);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@GetMapping(path="/getAll")
 	public List<Role> getAll(){
-		return roleService.getAllRoles();
+		try {
+			return roleService.getAllRoles();
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 	
 	@GetMapping(path="/getRoleByNic/{nic}")
 	public Role getRoleById(@PathVariable("nic") String nic) {
 		try {
-			System.out.println(nic);
+			
 			return roleService.getRoleById(nic);
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -41,6 +51,19 @@ public class RoleController {
 		}
 		
 	}
+	
+	@DeleteMapping(path="/deleteRoleById/{id}")
+	public void deleteRole(@PathVariable("id") int id) {
+		
+		try {
+			roleService.deleteRole(id);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
 	
 
 }
