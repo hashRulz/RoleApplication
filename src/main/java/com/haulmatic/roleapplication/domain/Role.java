@@ -1,5 +1,8 @@
 package com.haulmatic.roleapplication.domain;
 
+import java.time.LocalDateTime;
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,12 +25,18 @@ public class Role {
     @Column(name = "organization")
     private String org;
     
-    @Column(name = "nic")
+    @Column(name = "nic", unique = true)
     private String nic;
 
     @Column(name = "roleType")
     private String roleType;
-
+    
+    @Column(name ="created_date")
+    private LocalDateTime createDate;
+    
+    @Column(name ="last_modified_date")
+    private LocalDateTime modifiedDate;
+    
 	public int getId() {
 		return id;
 	}
@@ -76,6 +85,23 @@ public class Role {
 		this.roleType = roleType;
 	}
 
+	public LocalDateTime getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(LocalDateTime now) {
+		this.createDate = now;
+	}
+
+	public LocalDateTime getModifiedDate() {
+		return modifiedDate;
+	}
+
+	public void setModifiedDate(LocalDateTime modifiedDate) {
+		this.modifiedDate = modifiedDate;
+	}
+
+	
     
 
 

@@ -3,6 +3,8 @@ package com.haulmatic.roleapplication.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -68,14 +70,29 @@ public class RoleController {
 	public void updateRole(@PathVariable("id") int id,@RequestBody Role role) {
 		
 		try {
+			
 			roleService.updateRoleById(id,role);
 			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		
-		
+	}
+
+	@GetMapping(path="getListByOrg-Rtype/{org}/{rtype}")
+	public ResponseEntity<List<Role>>  getAllByOrg(@PathVariable("org") String org, @PathVariable("rtype") String rtype){
+		try {
+			
+			List<Role> roleList = roleService.getListByOrg(org,rtype);
+			
+			return new ResponseEntity<>(roleList,HttpStatus.OK);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	
 	}
 	
-
+	
 }

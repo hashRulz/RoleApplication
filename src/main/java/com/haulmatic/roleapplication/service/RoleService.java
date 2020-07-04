@@ -11,4 +11,5 @@ public interface RoleService {
 	Role getRoleById(String nic);
 	void deleteRole(int id);
 	void updateRoleById(int id,Role role);
+	List<Role> getListByOrg(String org,String rtype);
 }
